@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
 
@@ -40,6 +41,7 @@ dependencies {
     //implementation 'com.foursquare:pilgrimsdk:2.4.1'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.maps.android:android-maps-utils:1.2.1'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

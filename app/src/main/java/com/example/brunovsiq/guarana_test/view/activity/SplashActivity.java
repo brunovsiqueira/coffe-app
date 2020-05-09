@@ -1,4 +1,4 @@
-package com.example.brunovsiq.guarana_test.view;
+package com.example.brunovsiq.guarana_test.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Start home activity
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
         // close splash activity
         finish();
     }

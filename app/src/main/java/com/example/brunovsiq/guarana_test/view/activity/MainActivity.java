@@ -1,7 +1,8 @@
-package com.example.brunovsiq.guarana_test.view;
+package com.example.brunovsiq.guarana_test.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -20,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         navController = Navigation.findNavController(this, R.id.fragment_main);
-        NavigationUI.setupActionBarWithNavController(this, navController);
+
+        //NavigationUI.setupActionBarWithNavController(this, navController);
     }
 
     @Override

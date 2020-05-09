@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.fragment.HomeFragment">
+    tools:context=".view.activity.HomeActivity">
 
     <include layout="@layout/toolbar_app"/>
 
@@ -16,7 +16,7 @@
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:id="@+id/map"
+            android:id="@+id/home_map"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"/>

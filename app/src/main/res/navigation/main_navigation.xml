@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.brunovsiq.guarana_test.view.HomeFragment"
+        android:name="com.example.brunovsiq.guarana_test.view.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.brunovsiq.guarana_test.view.FavoriteFragment"
+        android:name="com.example.brunovsiq.guarana_test.view.fragment.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.brunovsiq.guarana_test.view.DetailFragment"
+        android:name="com.example.brunovsiq.guarana_test.view.fragment.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action

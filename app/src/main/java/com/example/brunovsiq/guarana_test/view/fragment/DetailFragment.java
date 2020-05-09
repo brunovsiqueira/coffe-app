@@ -1,4 +1,4 @@
-package com.example.brunovsiq.guarana_test.view;
+package com.example.brunovsiq.guarana_test.view.fragment;
 
 
 import android.os.Bundle;
