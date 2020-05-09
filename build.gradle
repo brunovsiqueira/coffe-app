@@ -18,6 +18,10 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+//        maven {
+//            url 'https://foursquare.jfrog.io/foursquare/libs-release/'
+//        }
         
     }
 }

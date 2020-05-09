@@ -37,6 +37,10 @@ def navVersion = '2.1.0-alpha05'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //implementation 'com.foursquare:pilgrimsdk:2.4.1'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.maps.android:android-maps-utils:1.2.1'
+
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
