@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private RecyclerView placesRecyclerView;
     private ProgressBar progressBar;
+    private PlacesAdapter placesAdapter = new PlacesAdapter(new ArrayList<>(), this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
         placesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //dogsRecyclerView.setAdapter(dogsListAdapter);
+        placesRecyclerView.setAdapter(placesAdapter);
         observeViewModel();
     }
 
@@ -91,6 +92,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         viewModel.placesList.observe(this, placeArrayList -> {
             if (placeArrayList.size() > 0) {
                 addMarkers(placeArrayList);
+                placesAdapter.updatePlacesList(placeArrayList);
                 progressBar.setVisibility(View.GONE);
             }
         });
