@@ -1,6 +1,9 @@
 package com.example.brunovsiq.guarana_test.model;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Place {
 
     public String id;
@@ -11,13 +14,20 @@ public class Place {
     public String city;
     public String state;
 
-    public Place(String id, String name, String address, double lat, double lng, String city, String state) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.lat = lat;
-        this.lng = lng;
-        this.city = city;
-        this.state = state;
+    public Place(JSONObject jsonObject) {
+        try {
+            JSONObject venuesJson = jsonObject.getJSONObject("venue");
+            this.id = venuesJson.getString("id");
+            this.name = venuesJson.getString("name");
+            JSONObject locationJson = venuesJson.getJSONObject("location");
+            this.address = locationJson.getString("address");
+            this.city = locationJson.getString("city");
+            this.state = locationJson.getString("state");
+            this.lat = locationJson.getDouble("lat");
+            this.lng = locationJson.getDouble("lng");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

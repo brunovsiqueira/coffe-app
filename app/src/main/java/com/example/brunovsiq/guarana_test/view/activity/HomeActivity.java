@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
@@ -13,21 +16,30 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
 import com.example.brunovsiq.guarana_test.R;
+import com.example.brunovsiq.guarana_test.model.Place;
 import com.example.brunovsiq.guarana_test.viewmodel.HomeViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.jacksonandroidnetworking.JacksonParserFactory;
+
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -37,10 +49,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private double latitude;
     private double longitude;
 
+    private RecyclerView placesRecyclerView;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        findViewItems();
+
+        AndroidNetworking.initialize(getApplicationContext());
+        AndroidNetworking.setParserFactory(new JacksonParserFactory());
 
         requestPermission();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -53,11 +72,41 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    private void findViewItems() {
+        placesRecyclerView = findViewById(R.id.places_rv);
+        progressBar = findViewById(R.id.home_pb);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
+        placesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //dogsRecyclerView.setAdapter(dogsListAdapter);
+        observeViewModel();
+    }
+
+    private void observeViewModel() {
+        viewModel.placesList.observe(this, placeArrayList -> {
+            if (placeArrayList.size() > 0) {
+                addMarkers(placeArrayList);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
+        viewModel.isLoading.observe(this, placeArrayList -> {
+            progressBar.setVisibility(View.VISIBLE);
+        });
+    }
+
+    private void addMarkers(ArrayList<Place> placeArrayList) {
+        for (Place place : placeArrayList) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(place.lat, place.lng))
+                    .title(place.name))
+                    .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon));
+        }
     }
 
     @Override
