@@ -15,6 +15,7 @@ public class Place {
     public String state;
     public int distance;
 
+
     public Place(JSONObject jsonObject) {
         try {
             JSONObject venuesJson = jsonObject.getJSONObject("venue");

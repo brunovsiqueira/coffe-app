@@ -1,4 +1,4 @@
-package com.example.brunovsiq.guarana_test.view.activity;
+package com.example.brunovsiq.guarana_test.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;

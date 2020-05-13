@@ -1,6 +1,7 @@
 package com.example.brunovsiq.guarana_test.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
         Place place = placesList.get(position);
         holder.name.setText(place.name);
         String kmDistance = new DecimalFormat("#.##").format(place.distance/1000);
-        holder.distance.setText(kmDistance);
+        holder.distance.setText(kmDistance + "KM away");
     }
 
     @Override
@@ -63,7 +64,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
             distance = itemView.findViewById(R.id.place_distance);
 
             itemView.setOnClickListener(v -> {
-
+                Intent intentToDetail = new Intent(itemView.getContext(), DetailActivity.class);
+                itemView.getContext().startActivity(intentToDetail);
             });
         }
     }
