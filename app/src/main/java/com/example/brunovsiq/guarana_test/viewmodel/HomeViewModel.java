@@ -38,7 +38,7 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void fetchFromServer(String latLng) {
 
-        AndroidNetworking.get(ApiService.BASE_URL + ApiService.venuesEndpoint + "&ll=" + latLng)
+        AndroidNetworking.get(ApiService.BASE_URL + ApiService.venuesExploreEndpoint + "&ll=" + latLng)
                 //.addQueryParameter("limit", "3")
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -73,27 +73,6 @@ public class HomeViewModel extends AndroidViewModel {
                         isLoading.setValue(false);
                     }
                 });
-
-
-//        disposable.add(
-//                placesRepository.getPlaces(latLng)
-//                        .subscribeOn(Schedulers.newThread())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribeWith(new DisposableSingleObserver<ArrayList<Place>>() {
-//                            @Override
-//                            public void onSuccess(ArrayList<Place> placeArrayList) {
-//                                placesList.setValue(placeArrayList);
-//                                placesLoadError.setValue(false);
-//                                isLoading.setValue(false);
-//                            }
-//
-//                            @Override
-//                            public void onError(Throwable e) {
-//                                placesLoadError.setValue(true);
-//                                isLoading.setValue(false);
-//                            }
-//                        })
-//        );
     }
 
     @Override

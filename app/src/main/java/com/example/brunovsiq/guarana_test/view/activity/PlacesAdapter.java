@@ -65,6 +65,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
 
             itemView.setOnClickListener(v -> {
                 Intent intentToDetail = new Intent(itemView.getContext(), DetailActivity.class);
+                intentToDetail.putExtra("place", placesList.get(getAdapterPosition()));
                 itemView.getContext().startActivity(intentToDetail);
             });
         }

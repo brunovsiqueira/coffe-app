@@ -4,7 +4,9 @@ package com.example.brunovsiq.guarana_test.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Place {
+import java.io.Serializable;
+
+public class Place implements Serializable {
 
     public String id;
     public String name;
@@ -14,6 +16,10 @@ public class Place {
     public String city;
     public String state;
     public int distance;
+    public String phone;
+    public String pictureUrl; //prefix + original + suffix
+    public String description;
+    public String website; //canonicalUrl
 
 
     public Place(JSONObject jsonObject) {
@@ -32,5 +38,25 @@ public class Place {
             e.printStackTrace();
         }
 
+    }
+
+    public void setNewAttributes(JSONObject jsonObject) {
+        //set phone, pictureUrl, description and website
+        try {
+            if (jsonObject.getJSONObject("contact").has("phone")) {
+                this.phone = jsonObject.getJSONObject("contact").getString("phone");
+            }
+            if (jsonObject.getJSONObject("photos").getJSONArray("groups").length() > 0) {
+                this.pictureUrl = jsonObject.getJSONObject("photos").getJSONArray("groups").getJSONObject(0).getJSONArray("items").getJSONObject(0).getString("prefix") + "original" + jsonObject.getJSONObject("photos").getJSONArray("groups").getJSONObject(0).getJSONArray("items").getJSONObject(0).getString("suffix");
+            }
+            if (jsonObject.has("description")) {
+                this.description = jsonObject.getString("description");
+            }
+            if (jsonObject.getString("canonicalUrl") != null) {
+                this.website = jsonObject.getString("canonicalUrl");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

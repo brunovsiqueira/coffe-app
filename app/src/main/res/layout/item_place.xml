@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/green"
-            android:text="OPEN"
+            android:text="@string/open"
             android:textSize="20sp"/>
 
         <TextView
