@@ -96,9 +96,9 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
             Picasso.get().load(newPlace.pictureUrl).into(coffePicture);
         }
         if (newPlace.phone != null){
-            Uri u = Uri.parse("tel:" + newPlace.phone);
             phoneImage.setOnClickListener(v -> {
-                new Intent(Intent.ACTION_DIAL, u);
+
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + newPlace.phone)));
             });
         }
         if (newPlace.website != null) {
