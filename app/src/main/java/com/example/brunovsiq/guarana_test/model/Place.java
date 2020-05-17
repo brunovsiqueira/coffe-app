@@ -6,9 +6,18 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Place implements Serializable {
 
+    @PrimaryKey
+    @NonNull
     public String id;
+
     public String name;
     public String address;
     public double lat;
@@ -19,8 +28,12 @@ public class Place implements Serializable {
     public String phone;
     public String pictureUrl; //prefix + original + suffix
     public String description;
+
     public String website; //canonicalUrl
 
+    public Place() {
+
+    }
 
     public Place(JSONObject jsonObject) {
         try {

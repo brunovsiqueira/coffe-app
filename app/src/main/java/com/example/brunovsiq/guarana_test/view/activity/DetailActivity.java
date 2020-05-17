@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.brunovsiq.guarana_test.R;
+import com.example.brunovsiq.guarana_test.database.PlaceDatabase;
 import com.example.brunovsiq.guarana_test.model.Place;
 import com.example.brunovsiq.guarana_test.viewmodel.DetailViewModel;
 import com.example.brunovsiq.guarana_test.viewmodel.HomeViewModel;
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -54,6 +57,9 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     @BindView(R.id.imageView)
     ImageView coffePicture;
 
+    @BindView(R.id.favorite)
+    LikeButton favoriteButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,11 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         place = (Place) getIntent().getSerializableExtra("place");
         textTitle.setText(place.name);
         textAddress.setText(place.address);
+
+        PlaceDatabase
+                .getInstance(getApplicationContext())
+                .getPlaceDao()
+                .getPlace(place.id);
     }
 
     @Override
@@ -83,6 +94,24 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         viewModel.placeMutable.observe(this, newPlace -> {
             populateView(newPlace);
             progressBar.setVisibility(View.GONE);
+            favoriteButton.setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+//                    PlaceDatabase
+//                            .getInstance(getApplicationContext())
+//                            .getPlaceDao()
+//                            .insert(newPlace);
+                    
+                }
+
+                @Override
+                public void unLiked(LikeButton likeButton) {
+//                    PlaceDatabase
+//                            .getInstance(getApplicationContext())
+//                            .getPlaceDao()
+//                            .delete(newPlace);
+                }
+            });
         });
 
         viewModel.isLoading.observe(this, loading -> {
