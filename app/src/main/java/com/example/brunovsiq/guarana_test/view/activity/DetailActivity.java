@@ -101,7 +101,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 //                            .getInstance(getApplicationContext())
 //                            .getPlaceDao()
 //                            .insert(newPlace);
-                    
+
                 }
 
                 @Override
